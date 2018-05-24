@@ -1,11 +1,11 @@
 # import numpy as np 
 # import matplotlib as plt 
-# import pandas as pd
+import pandas as pd
 # # from pandas import read_csv
 # import pywt
 
-# dataframe = pd.read_csv('huarui_5min.csv', usecols=[1], engine='python', encoding='utf-8')
-# dataset = dataframe.values
+dataframe = pd.read_csv('huarui_5min.csv', usecols=[1], engine='python', encoding='utf-8')
+dataset = dataframe.values
 # print(dataset[:,0])
 # coef, freqs=pywt.cwt(dataset[:288,0],np.arange(1,129),'cmor')
 # # w = pywt.Wavelet("cmor")
@@ -22,20 +22,21 @@ import pywt
 
 time, sst = pywt.data.nino()
 dt = time[1] - time[0]
-print(time,sst)
-plt.plot(sst)
-plt.show()
+print(len(time),len(sst))
+# plt.plot(sst)
+# plt.show()
 # Taken from http://nicolasfauchereau.github.io/climatecode/posts/wavelet-analysis-in-python/
 wavelet = 'cmor'
 scales = np.arange(1, 128)
 print(scales)
-[cfs, frequencies] = pywt.cwt(sst, scales, wavelet, dt)
+[cfs, frequencies] = pywt.cwt(dataset[:960,0], scales, wavelet, dt)
 power = (abs(cfs)) ** 2
 
 period = 1. / frequencies
 levels = [0.0625, 0.125, 0.25, 0.5, 1, 2, 4, 8]
 f, ax = plt.subplots(figsize=(15, 10))
-ax.contourf(time, np.log2(period), np.log2(power), np.log2(levels),
+print(period,power,levels)
+ax.contourf(np.arange(1,len(dataset[:960,0])+1), np.log2(period), np.log2(power), np.log2(levels),
             extend='both')
 
 ax.set_title('%s Wavelet Power Spectrum (%s)' % ('Nino1+2', wavelet))
@@ -48,4 +49,4 @@ ax.invert_yaxis()
 ylim = ax.get_ylim()
 ax.set_ylim(ylim[0], -1)
 
-# plt.show()
+plt.show()
