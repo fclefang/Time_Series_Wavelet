@@ -5,21 +5,20 @@ from pandas import read_csv
 import pandas as pd
 
 import math
-from keras.models import Sequential
-from keras.layers import Dense
-from keras.layers import LSTM
-from sklearn.preprocessing import MinMaxScaler
-from sklearn.metrics import mean_squared_error
+# from keras.models import Sequential
+# from keras.layers import Dense
+# from keras.layers import LSTM
+# from sklearn.preprocessing import MinMaxScaler
+# from sklearn.metrics import mean_squared_error
 
 # load the dataset
-dataframe = pd.read_excel('~/PycharmProjects/Test1/14.xlsx', skiprows=3)
+dataframe = pd.read_excel('14.xlsx', skiprows=1)
 
 # add status 1 or -1
 dataframe.loc[:,'D'] = 1
 dataframe.loc[:,'E'] = -1
-
 # conform in-time and out-time to the same column, status likely.
-result2 = pd.concat([dataframe.loc[:,'入场时间'], dataframe.loc[:,' 出场时间']], ignore_index=True)
+result2 = pd.concat([dataframe.loc[:,'入场时间'], dataframe.loc[:,'出场时间']], ignore_index=True)
 result3 = pd.concat([dataframe.loc[:,'D'], dataframe.loc[:,'E']], ignore_index=True)
 result1 = pd.concat([result2,result3], axis=1)
 
@@ -57,7 +56,7 @@ for i in range(len(result_list)):
         parking_num.append(num)
 
 ts = pd.Series(parking_num, index=date_generate)
-ts.to_csv('~/PycharmProjects/Test1/foshan.csv', encoding='utf-8', index=True)
+ts.to_csv('foshan.csv', encoding='utf-8', index=True)
 
 
 

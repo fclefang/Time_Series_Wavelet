@@ -4,7 +4,7 @@ import pandas as pd
 # # from pandas import read_csv
 # import pywt
 
-dataframe = pd.read_csv('huarui_5min.csv', usecols=[1], engine='python', encoding='utf-8')
+dataframe = pd.read_csv('foshan.csv', usecols=[1], engine='python', encoding='utf-8')
 dataset = dataframe.values
 # print(dataset[:,0])
 # coef, freqs=pywt.cwt(dataset[:288,0],np.arange(1,129),'cmor')
@@ -19,6 +19,9 @@ dataset = dataframe.values
 import numpy as np
 import matplotlib.pyplot as plt
 import pywt
+
+plt.plot(dataset)
+plt.show()
 
 time, sst = pywt.data.nino()
 dt = time[1] - time[0]
