@@ -20,7 +20,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pywt
 
-plt.plot(dataset)
+plt.plot(dataset[:960,0])
 plt.show()
 
 time, sst = pywt.data.nino()
@@ -32,14 +32,14 @@ print(len(time),len(sst))
 wavelet = 'cmor'
 scales = np.arange(1, 128)
 print(scales)
-[cfs, frequencies] = pywt.cwt(dataset[:960,0], scales, wavelet, dt)
+[cfs, frequencies] = pywt.cwt(dataset[:1500,0], scales, wavelet, dt)
 power = (abs(cfs)) ** 2
 
 period = 1. / frequencies
 levels = [0.0625, 0.125, 0.25, 0.5, 1, 2, 4, 8]
 f, ax = plt.subplots(figsize=(15, 10))
 print(period,power,levels)
-ax.contourf(np.arange(1,len(dataset[:960,0])+1), np.log2(period), np.log2(power), np.log2(levels),
+ax.contourf(np.arange(1,len(dataset[:1500,0])+1), np.log2(period), np.log2(power), np.log2(levels),
             extend='both')
 
 ax.set_title('%s Wavelet Power Spectrum (%s)' % ('Nino1+2', wavelet))
