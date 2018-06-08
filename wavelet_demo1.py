@@ -21,18 +21,20 @@ import matplotlib.pyplot as plt
 import pywt
 
 plt.plot(dataset[:960,0])
-plt.show()
+# plt.show()
 
 time, sst = pywt.data.nino()
+print(time)
+print(sst)
 dt = time[1] - time[0]
-print(len(time),len(sst))
+# print(len(time),len(sst))
 # plt.plot(sst)
 # plt.show()
 # Taken from http://nicolasfauchereau.github.io/climatecode/posts/wavelet-analysis-in-python/
 wavelet = 'cmor'
 scales = np.arange(1, 128)
-print(scales)
-[cfs, frequencies] = pywt.cwt(dataset[:1500,0], scales, wavelet, dt)
+# print(scales)
+[cfs, frequencies] = pywt.cwt(dataset[:1500,0], scales, wavelet, 1)
 power = (abs(cfs)) ** 2
 
 period = 1. / frequencies
