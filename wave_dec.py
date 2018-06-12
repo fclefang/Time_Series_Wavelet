@@ -8,7 +8,7 @@ dataset = dataframe.values
 import numpy as np
 import matplotlib.pyplot as plt
 import pywt
-x = dataset[190:220,0]
+x = dataset[50:220,0]
 plt.plot(x)
 plt.show()
 db1 = pywt.Wavelet('db4')
